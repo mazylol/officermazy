@@ -37,7 +37,6 @@ fn main() -> anyhow::Result<()> {
                 let output = String::from("You are not permitted to do that");
                 args.writer.reply(args.msg, &output).unwrap();
             }
-
         });
 
     smol::block_on(async move { bot.run(&user_config, &channels).await })
