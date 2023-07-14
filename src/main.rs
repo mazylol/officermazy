@@ -25,7 +25,7 @@ fn main() -> anyhow::Result<()> {
 
             args.writer.reply(args.msg, &output).unwrap();
         })
-        .with_command("!uptime", move |args: Args| {
+        .with_command("!bottime", move |args: Args| {
             let output = format!("its been running for {:.2?}", start.elapsed());
 
             args.writer.say(args.msg, &output).unwrap();
