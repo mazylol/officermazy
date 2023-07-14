@@ -31,7 +31,13 @@ fn main() -> anyhow::Result<()> {
             args.writer.say(args.msg, &output).unwrap();
         })
         .with_command("!quit", move |args: Args| {
-            smol::block_on(async move { args.quit.notify().await });
+            if args.msg.is_broadcaster() {
+                smol::block_on(async move { args.quit.notify().await });
+            } else {
+                let output = String::from("You are not permitted to do that");
+                args.writer.reply(args.msg, &output).unwrap();
+            }
+
         });
 
     smol::block_on(async move { bot.run(&user_config, &channels).await })
